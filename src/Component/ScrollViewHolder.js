@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, FlatList, Text } from "react-native";
-import { Icon } from "react-native-elements";
+import { View, FlatList, Text, Button } from "react-native";
+import { Icon, Divider } from "react-native-elements";
 
 export default class ScrollViewHolder extends Component {
   state = {
@@ -34,8 +34,12 @@ export default class ScrollViewHolder extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingTop: 20, paddingBottom: 20 }}>
+        <Text style={{ fontWeight: "bold", color: "white" }}>
+          2019 must read
+        </Text>
         <FlatList
+          showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.id.toString()}
           horizontal={true}
           data={this.state.cards}
@@ -43,12 +47,11 @@ export default class ScrollViewHolder extends Component {
             <View
               style={{
                 flex: 1,
-                borderRadius: 3,
-                borderWidth: 1,
-                borderColor: "black",
+                borderRadius: 5,
                 alignItems: "flex-start",
+                backgroundColor: "white",
                 width: 250,
-                height: 100,
+                height: 150,
                 margin: 10
               }}
             >
@@ -57,8 +60,7 @@ export default class ScrollViewHolder extends Component {
                   flex: 1,
                   flexDirection: "row",
                   alignItems: "center",
-                  padding: 10,
-                  backgroundColor: "white"
+                  padding: 10
                 }}
               >
                 <Icon
@@ -66,9 +68,20 @@ export default class ScrollViewHolder extends Component {
                   type="feather"
                   containerStyle={{ paddingRight: 10 }}
                 />
-                <Text> {item.title}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text>{item.title}</Text>
+                  <Text>Date uploaded: {item.date}</Text>
+                </View>
               </View>
               <Text style={{ padding: 10 }}>{item.description}</Text>
+              <Divider
+                style={{
+                  alignSelf: "center",
+                  width: "90%",
+                  backgroundColor: "black"
+                }}
+              />
+              <Button title={"Read Now"} color="black" />
             </View>
           )}
         />

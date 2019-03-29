@@ -39,6 +39,7 @@ const ChannelTab = createMaterialTopTabNavigator(
     Categories: { screen: Categories }
   },
   {
+    resetOnBlur: true,
     lazy: true,
     animationEnabled: true,
     tabBarComponent: SafeAreaMaterialTopTabBar,
@@ -80,12 +81,19 @@ const ChannelStack = createStackNavigator(
 
 const DiscoverStack = createStackNavigator(
   {
-    Home: { screen: Discover },
+    Home: {
+      screen: Discover,
+      navigationOptions: () => ({
+        title: "Discover",
+        headerStyle: { backgroundColor: "#23272A" },
+        headerTintColor: "#E9CDB5"
+      })
+    },
     Video: { screen: Video },
     Actor: { screen: Actor }
   },
   {
-    headerMode: "none",
+    headerMode: "screen",
     initialRouteName: "Home"
   }
 );
@@ -150,17 +158,21 @@ const TabNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Channel",
+    initialRouteName: "Discover",
     order: ["Main", "Channel", "Discover", "Profile"],
     lazy: true,
     animationEnabled: true,
+    resetOnBlur: true,
     tabBarOptions: {
       inactiveTintColor: "grey",
       activeTintColor: "#E9CDB5",
       showIcon: true,
       showLabel: false,
       indicatorStyle: { display: "none" },
-      style: { backgroundColor: "#23272A" }
+      style: {
+        backgroundColor: "#23272A",
+        borderTopColor: "grey"
+      }
     }
   }
 );

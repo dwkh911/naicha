@@ -109,6 +109,7 @@ class Video extends Component {
 
     if (this.props.user.count !== 10){
       this.setState({ 
+        preview: true,
         url: resp.vod_play_url.replace("720p$", ""),
         modal: true,
         imgUrl: resp.vod_pic,

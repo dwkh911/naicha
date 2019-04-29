@@ -1,0 +1,12 @@
+export const GET_ALL_VIDEOS = "GET_ALL_VIDEOS";
+export const GET_ALL_NOVELS = "GET_ALL_NOVELS";
+export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_USER = "GET_USER";
+export const VIDEO_API = "VIDEO_API";
+export const NOVEL_API = "NOVEL_API";
+export const CATEGORY_API = "CATEGORY_API";
+export const USER_API = "USER_API";
+export const WATCH_COUNTER = "WATCH_COUNTER";
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const RESET_COUNTER = "RESET_COUNTER";

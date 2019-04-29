@@ -16,7 +16,7 @@ export default class AdsBanner extends Component {
           width={350}
           height={200}
           delay={2000}
-          loop={true}
+          loop={false}
           indicatorAtBottom={true}
           indicatorSize={20}
           indicatorColor="white"
@@ -37,7 +37,7 @@ export default class AdsBanner extends Component {
               }}
               source={{
                 uri:
-                  "https://www.95naicha.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
+                  "https://ht.naicha6.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
               }}
             />
           </View>
@@ -58,7 +58,7 @@ export default class AdsBanner extends Component {
               }}
               source={{
                 uri:
-                  "https://www.95naicha.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
+                  "https://ht.naicha6.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
               }}
             />
           </View>
@@ -79,7 +79,7 @@ export default class AdsBanner extends Component {
               }}
               source={{
                 uri:
-                  "https://www.95naicha.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
+                  "https://ht.naicha6.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
               }}
             />
           </View>
@@ -100,7 +100,7 @@ export default class AdsBanner extends Component {
               }}
               source={{
                 uri:
-                  "https://www.95naicha.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
+                  "https://ht.naicha6.com/upload/vod/20190325-1/ab67b6e9504a632e32cece04b5a12fbc.jpg"
               }}
             />
           </View>

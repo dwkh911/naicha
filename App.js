@@ -1,10 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+// https://5naicha.com/naichaadmin.php/index/login.html
+// ID: naichaadmin
+// Pass: Sexier520
+
 
 import React, { Component } from "react";
 import {
@@ -14,8 +11,7 @@ import {
   createBottomTabNavigator,
   MaterialTopTabBar
 } from "react-navigation";
-import { View, Text, SafeAreaView } from "react-native";
-import { Icon } from "react-native-elements";
+import { SafeAreaView, Image } from "react-native";
 
 import Home from "./src/Pages/Home";
 import Discover from "./src/Pages/Discover";
@@ -24,6 +20,9 @@ import Video from "./src/Pages/Video";
 import Actor from "./src/Pages/Actor";
 import Recommended from "./src/Pages/Recommended";
 import Categories from "./src/Pages/Categories";
+import Novel from "./src/Pages/Novel";
+import Search from "./src/Pages/Search";
+import Login from "./src/Pages/Login";
 
 SafeAreaMaterialTopTabBar = props => {
   return (
@@ -35,8 +34,8 @@ SafeAreaMaterialTopTabBar = props => {
 
 const ChannelTab = createMaterialTopTabNavigator(
   {
-    Recommended: { screen: Recommended },
-    Categories: { screen: Categories }
+    专栏推荐: { screen: Recommended },
+    标签筛选: { screen: Categories },
   },
   {
     resetOnBlur: true,
@@ -58,7 +57,7 @@ const ChannelTab = createMaterialTopTabNavigator(
 const HomeStack = createStackNavigator(
   {
     Home: { screen: Home },
-    Video: { screen: Video },
+    // Video: { screen: Video },
     Actor: { screen: Actor }
   },
   {
@@ -70,8 +69,9 @@ const HomeStack = createStackNavigator(
 const ChannelStack = createStackNavigator(
   {
     Home: { screen: ChannelTab },
-    Video: { screen: Video },
-    Actor: { screen: Actor }
+    // Video: { screen: Video },
+    Actor: { screen: Actor },
+    // Novel: { screen: Novel }
   },
   {
     headerMode: "none",
@@ -84,13 +84,12 @@ const DiscoverStack = createStackNavigator(
     Home: {
       screen: Discover,
       navigationOptions: () => ({
-        title: "Discover",
+        title: "发现",
+        headerTitleStyle: { flex: 1, textAlign: 'center' },
         headerStyle: { backgroundColor: "#23272A" },
         headerTintColor: "#E9CDB5"
       })
     },
-    Video: { screen: Video },
-    Actor: { screen: Actor }
   },
   {
     headerMode: "screen",
@@ -101,7 +100,8 @@ const DiscoverStack = createStackNavigator(
 const ProfileStack = createStackNavigator(
   {
     Home: { screen: Profile },
-    Video: { screen: Video },
+    Login: { screen: Login },
+    // Video: { screen: Video },
     Actor: { screen: Actor }
   },
   {
@@ -115,50 +115,54 @@ const TabNavigator = createBottomTabNavigator(
     Main: {
       screen: HomeStack,
       navigationOptions: () => ({
+        title: '主页',
         tabBarIcon: ({ focused, tintColor }) =>
           focused ? (
-            <Icon name="home" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav01-hover.png')} />
           ) : (
-            <Icon name="home" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav01.png')} />
           )
       })
     },
     Channel: {
       screen: ChannelStack,
       navigationOptions: () => ({
+        title: '频道',
         tabBarIcon: ({ focused, tintColor }) =>
           focused ? (
-            <Icon name="youtube" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav02-hover.png')} />
           ) : (
-            <Icon name="youtube" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav02.png')} />
           )
       })
     },
     Discover: {
       screen: DiscoverStack,
       navigationOptions: () => ({
+        title: '发现',
         tabBarIcon: ({ focused, tintColor }) =>
           focused ? (
-            <Icon name="compass" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav03-hover.png')} />
           ) : (
-            <Icon name="compass" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav03.png')} />
           )
       })
     },
     Profile: {
       screen: ProfileStack,
       navigationOptions: () => ({
+        title: '我的',
         tabBarIcon: ({ focused, tintColor }) =>
           focused ? (
-            <Icon name="user" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav04-hover.png')} />
           ) : (
-            <Icon name="user" type="feather" color={tintColor} />
+            <Image style={{width:25, height:25}} source={require('./image/bottomnav04.png')} />
           )
       })
     }
   },
   {
-    initialRouteName: "Discover",
+    initialRouteName: "Main",
     order: ["Main", "Channel", "Discover", "Profile"],
     lazy: true,
     animationEnabled: true,
@@ -167,7 +171,8 @@ const TabNavigator = createBottomTabNavigator(
       inactiveTintColor: "grey",
       activeTintColor: "#E9CDB5",
       showIcon: true,
-      showLabel: false,
+      showLabel: true,
+      labelStyle: { fontSize: 12 },
       indicatorStyle: { display: "none" },
       style: {
         backgroundColor: "#23272A",
@@ -177,6 +182,19 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-const App = createAppContainer(TabNavigator);
+const mainNavContainer = createStackNavigator(
+  {
+    MainPage: { screen: TabNavigator },
+    Novel: { screen: Novel },
+    Video: { screen: Video },
+    Search: { screen: Search },
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'MainPage'
+  }
+)
+
+const App = createAppContainer(mainNavContainer);
 
 export default App;

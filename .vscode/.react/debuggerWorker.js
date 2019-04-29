@@ -10,7 +10,11 @@ Object.defineProperty(global, "GLOBAL", {
     enumerable: true,
     value: global
 });
-
+// Prevent leaking process.versions from debugger process to
+// worker because pure React Native doesn't do that and some packages as js-md5 rely on this behavior
+Object.defineProperty(process, "versions", {
+    value: undefined
+});
 var vscodeHandlers = {
     'vscode_reloadApp': function () {
         try {
@@ -27,7 +31,6 @@ var vscodeHandlers = {
         }
     }
 };
-
 process.on("message", function (message) {
     if (message.data && vscodeHandlers[message.data.method]) {
         vscodeHandlers[message.data.method]();
@@ -35,20 +38,36 @@ process.on("message", function (message) {
         onmessage(message);
     }
 });
-
 var postMessage = function(message){
     process.send(message);
 };
-
 if (!self.postMessage) {
     self.postMessage = postMessage;
 }
-
 var importScripts = (function(){
     var fs=require('fs'), vm=require('vm');
     return function(scriptUrl){
         var scriptCode = fs.readFileSync(scriptUrl, "utf8");
         vm.runInThisContext(scriptCode, {filename: scriptUrl});
+    };
+})();
+// Worker is ran as nodejs process, so console.trace() writes to stderr and it leads to error in native app
+// To avoid this console.trace() is overridden to print stacktrace via console.log()
+// Please, see Node JS implementation: https://github.com/nodejs/node/blob/master/lib/internal/console/constructor.js
+console.trace = (function() {
+    return function() {
+        try {
+            var err = {
+                name: 'Trace',
+                message: require('util').format.apply(null, arguments)
+                };
+            // Node uses 10, but usually it's not enough for RN app trace
+            Error.stackTraceLimit = 30;
+            Error.captureStackTrace(err, console.trace);
+            console.log(err.stack);
+        } catch (e) {
+            console.error(e);
+        }
     };
 })();
 

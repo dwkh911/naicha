@@ -9,6 +9,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     backgroundColor: "#23272A",
+    // backgroundColor: "#374042",
     justifyContent: "flex-start"
   },
   leftHeader: {
@@ -19,7 +20,7 @@ export default StyleSheet.create({
     flex: 3,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start"
+    justifyContent: "space-around"
   },
   content: {
     flex: 9
@@ -33,7 +34,8 @@ export default StyleSheet.create({
     margin: "auto"
   },
   text: {
-    fontSize: 10,
-    color: "white"
+    fontSize: 12,
+    color: "white",
+    alignSelf: 'center'
   }
 });

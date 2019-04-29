@@ -136,7 +136,8 @@ class Video extends Component {
     this.setState({
       preview: false
     });
-    this.props.addCounter(), postUserInfo(
+    this.props.addCounter();
+    postUserInfo(
       user.userId,
       user.username,
       user.userPwd,

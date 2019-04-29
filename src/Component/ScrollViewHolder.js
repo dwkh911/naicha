@@ -39,9 +39,6 @@ export default class ScrollViewHolder extends Component {
   render() {
     return (
       <View style={styles.novelContainer}>
-        {/* <Text style={{ fontWeight: "bold", color: "white" }}>
-          2019 必阅
-        </Text> */}
 
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -85,45 +82,3 @@ export default class ScrollViewHolder extends Component {
     );
   }
 }
-
-
-{/* <Card
-title='HELLO WORLD'>
-<Text style={{marginBottom: 10}}>
-  The idea with React Native Elements is more about component structure than actual design.
-</Text>
-<Button
-  icon={<Icon name='code' color='#ffffff' />}
-  backgroundColor='#03A9F4'
-  buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-  title='VIEW NOW' />
-</Card>
-
-<View style={styles.novelHeader}>
-                <Icon
-                  name="book"
-                  type="antdesign"
-                  containerStyle={{ paddingRight: 10 }}
-                />
-
-                <Text style={styles.blackText}>
-                  {item.art_name.replace("- 奶茶视频", "")}
-                </Text>
-              </View>
-
-              <Text style={{ color: 'black', padding: 10 }}>
-                类型: {item.type_name}
-              </Text>
-
-              <Text numberOfLines={1} style={{ padding: 10 }}>
-                上载日期: {item.art_time}
-              </Text>
-
-              <Divider style={styles.divider} />
-
-              <Button 
-                onPress={() => this.props.onPress(item.art_name, item.art_time, item.art_hits, item.art_content, item.type_name)} 
-                title={"开始阅读"} 
-                containerStyle={styles.novelBtnContainer}
-                buttonStyle={styles.novelBtnStyle}
-              /> */}

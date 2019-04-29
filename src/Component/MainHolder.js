@@ -84,67 +84,6 @@ export default class MainHolder extends Component {
               </TouchableOpacity>
             )}
           />
-
-          {/* <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/btn01.png')}
-              style={{width:30, height:30}}
-            />
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/btn02.png')}
-              style={{width:30, height:30}}
-            />
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/btn03.png')}
-              style={{width:30, height:30}}
-            />
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/btn04.png')}
-              style={{width:30, height:30}}
-            />
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-        </View>
-        <View
-          style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}
-        >
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/btn05.png')}
-              style={{width:50, height:50}}
-            />  
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/bottomnav02-hover.png')}
-              style={{width:30, height:30}}
-            />  
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/topnav01.png')}
-              style={{width:50, height:50}}
-            />  
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View>
-          <View style={styles.iconsContainer}>
-            <Image
-              source={require('../../image/btn08.png')}
-              style={{width:'100%', height:'100%'}}
-            />  
-            <Text style={styles.text}> Lorem Ipsum</Text>
-          </View> */}
         </View>  
 
       </View>

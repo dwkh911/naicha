@@ -16,7 +16,7 @@ export default class AdsBanner extends Component {
           width={350}
           height={200}
           delay={2000}
-          loop={false}
+          loop={true}
           indicatorAtBottom={true}
           indicatorSize={20}
           indicatorColor="white"

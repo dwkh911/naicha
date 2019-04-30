@@ -233,8 +233,12 @@ class Profile extends Component {
                     <Text style={styles.buttonLabel}>激活码兑换</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={[styles.button,{marginLeft:40}]}>
-                    <Text style={styles.buttonLabel}>登陆注册</Text>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={[
+                      this.props.user.isLogin
+                      ? styles.hiddenButton
+                      : styles.button,{marginLeft:40}
+                    ]}>
+                    <Text style={this.props.user.isLogin ? styles.hiddenButtonLabel : styles.buttonLabel}>登陆注册</Text>
                   </TouchableOpacity>
                 </View>
 

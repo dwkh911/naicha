@@ -79,23 +79,23 @@ class Home extends Component {
     })
   }
 
-  reset = () => {
-    console.log('reset');
-    let user = this.props.user;
-    postUserInfo(
-      user.userId,
-      user.username,
-      user.userPwd,
-      user.userNickname,
-      user.userQQ,
-      user.userEmail,
-      user.userPhone,
-      user.userQues,
-      user.userAns,
-      0,
-      user.rawPwd
-    );
-  }
+  // reset = () => {
+  //   console.log('reset');
+  //   let user = this.props.user;
+  //   postUserInfo(
+  //     user.userId,
+  //     user.username,
+  //     user.userPwd,
+  //     user.userNickname,
+  //     user.userQQ,
+  //     user.userEmail,
+  //     user.userPhone,
+  //     user.userQues,
+  //     user.userAns,
+  //     0,
+  //     user.rawPwd
+  //   );
+  // }
 
   openVideo = (resp) => {
     if (this.props.user.isLogin){
@@ -218,7 +218,7 @@ class Home extends Component {
                   source={require('../../image/topnav02.png')}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={this.reset}>
+              <TouchableOpacity>
                 <Image
                   style={{height:20, width:20}}
                   source={require('../../image/topnav03.png')}

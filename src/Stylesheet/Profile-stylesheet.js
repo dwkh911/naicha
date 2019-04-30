@@ -48,8 +48,22 @@ export default StyleSheet.create ({
         borderRadius: 7,
         margin:10
     },
+    hiddenButton:{
+        borderWidth:1, 
+        borderColor:'transparent', 
+        width: 100, 
+        paddingVertical: 2,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius: 7,
+        margin:10
+    },
     buttonLabel:{
         color:'#FFCA28',
+        fontSize:15
+    },
+    hiddenButtonLabel:{
+        color:'transparent',
         fontSize:15
     },
     centralised:{

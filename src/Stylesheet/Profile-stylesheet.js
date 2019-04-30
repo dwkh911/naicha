@@ -119,5 +119,29 @@ export default StyleSheet.create ({
         fontSize: 18,
         color: "gold",
         padding: 4
+    },
+    saveButton: {
+        marginVertical: 10, 
+        borderWidth: 2, 
+        alignSelf: 'flex-end', 
+        padding: 5, 
+        width: 100, 
+        borderColor: '#FFCA28', 
+        borderRadius: 8, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginRight: 7
+    },
+    buttonText: {
+        color: "#FFCA28",
+        fontSize: 16
+    },
+    userLabel: {
+        padding: 10,
+        color: "black",
+        margin: 5,
+    },
+    userContent: {
+        color: "grey"
     }
 })

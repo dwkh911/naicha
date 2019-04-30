@@ -58,9 +58,11 @@ class Profile extends Component {
       name:"",
       nickname: "",
       qq: "",
+      email: "",
       phone: "",
       question: "",
       answer: "",
+      userInfo: false,
       edit: false,
       count: "-",
       oriPwd: "",
@@ -77,10 +79,11 @@ class Profile extends Component {
         name: this.props.user.username,
         nickname: this.props.user.userNickname,
         qq: this.props.user.userQQ,
+        email: this.props.user.userEmail,
         phone: this.props.user.userPhone,
         question: this.props.user.userQues,
         answer: this.props.user.userAns,
-        edit:true,
+        userInfo: true,
         count: (this.props.user.count == 0) ? 10 : 10-this.props.user.count
       })
     : null
@@ -94,30 +97,29 @@ class Profile extends Component {
       name: nextProps.user.username,
       nickname: nextProps.user.userNickname,
       qq: nextProps.user.userQQ,
+      email: nextProps.user.userEmail,
       phone: nextProps.user.userPhone,
       question: nextProps.user.userQues,
       answer: nextProps.user.userAns,
-      edit: true,
+      userInfo: true,
       count: (nextProps.user.count == 0) ? 10 : 10-nextProps.user.count
     })
     :
     this.setState({
       loginText: "看官大人请登录",
-      name: "",
-      nickname: "",
-      qq: "",
-      phone: "",
-      question: "",
-      answer: "",
-      edit: false,
+      // name: "",
+      // nickname: "",
+      // qq: "",
+      // phone: "",
+      // question: "",
+      // answer: "",
+      userInfo: false,
       count: "-"
     })
   }
 
   logout = () => {
-    this.setState({
-      active: false,
-    }, () => this.props.userLogout())
+    this.props.userLogout();
     Alert.alert(
       "",
       "登出成功!",
@@ -162,6 +164,7 @@ class Profile extends Component {
           this.props.user.userPwd,
           this.state.nickname,
           this.state.qq,
+          this.state.email,
           this.state.phone,
           this.state.question,
           this.state.answer,
@@ -175,15 +178,20 @@ class Profile extends Component {
         //time delay to update redux state for POST url updating
         setTimeout(() => 
         {
-          this.setState({ loading: false }, Alert.alert("", "资料更新成功!", [ { text: "确定", style: "cancel" } ]));
+          this.profScroll.scrollTo({ x: 0, y: 0 });
           this.props.getUsers("Profile");
           setTimeout(() => {
+            this.setState({ loading: false, edit: false }, Alert.alert("", "资料更新成功!", [ { text: "确定", style: "cancel" } ]));
             Object.keys(this.props.user.users).forEach(g => {
               if (this.props.user.users[g].user_id == this.props.user.userId){
-                this.props.onLogin(this.props.user.users[g], this.state.pwd2);
+                if (this.state.pwd2 != ""){
+                  this.props.onLogin(this.props.user.users[g], this.state.pwd2);
+                } else {
+                  this.props.onLogin(this.props.user.users[g], this.state.oriPwd);
+                }
               }
             })
-          }, 1500)
+          }, 2000)
         },2000)
       }
     }
@@ -214,10 +222,14 @@ class Profile extends Component {
           </View>
 
           <View style={styles.contentContainer}>
-            <ScrollView showsVerticalScrollIndicator={false} style={styles.contentScrollview}>
+            <ScrollView 
+              ref={ref => this.profScroll = ref}
+              showsVerticalScrollIndicator={false} 
+              style={styles.contentScrollview}
+            >
               <View style={styles.content}>
                 <View style={styles.buttonBanner}>
-                  <TouchableOpacity onPress={() => console.log(this.state.active)} style={[styles.button,{marginRight:40}]}>
+                  <TouchableOpacity onPress={() => console.log(this.state.userInfo)} style={[styles.button,{marginRight:40}]}>
                     <Text style={styles.buttonLabel}>激活码兑换</Text>
                   </TouchableOpacity>
 
@@ -253,71 +265,101 @@ class Profile extends Component {
               </View>
 
               {
-                this.state.edit && 
-                <View style={styles.iconContainer}>
-                  <Text style={styles.changeProfileText}>修改资料</Text>
-                  <Input
-                    label="用户名"
-                    value={this.state.name}
-                    onChangeText={(text) => this.setState({ name: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                  />
-                  <Input
-                    label="用户称呼"
-                    value={this.state.nickname}
-                    onChangeText={(text) => this.setState({ nickname: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                  />
-                  <Input
-                    label="原密码"
-                    value={this.state.oriPwd}
-                    onChangeText={(text) => this.setState({ oriPwd: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                    secureTextEntry
-                  />
-                  <Input
-                    label="新密码"
-                    value={this.state.pwd1}
-                    onChangeText={(text) => this.setState({ pwd1: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                    secureTextEntry
-                  />
-                  <Input
-                    label="重复密码"
-                    value={this.state.pwd2}
-                    onChangeText={(text) => this.setState({ pwd2: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                    secureTextEntry
-                  />
-                  <Input
-                    label="QQ号码"
-                    value={this.state.qq}
-                    onChangeText={(text) => this.setState({ qq: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                  />
-                  <Input
-                    label="联系手机"
-                    value={this.state.phone}
-                    onChangeText={(text) => this.setState({ phone: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                  />
-                  <Input
-                    label="密码问题"
-                    value={this.state.question}
-                    onChangeText={(text) => this.setState({ question: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                  />
-                  <Input
-                    label="密码答案"
-                    value={this.state.answer}
-                    onChangeText={(text) => this.setState({ answer: text })}
-                    containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
-                  />
+                this.state.userInfo 
+                ?
+                  this.state.edit
+                  ?
+                  <View style={styles.iconContainer}>
+                    <Text style={styles.changeProfileText}>修改资料</Text>
+                    <Input
+                      label="用户名"
+                      value={this.state.name}
+                      onChangeText={(text) => this.setState({ name: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
+                    <Input
+                      label="用户称呼"
+                      value={this.state.nickname}
+                      onChangeText={(text) => this.setState({ nickname: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
+                    <Input
+                      label="原密码"
+                      value={this.state.oriPwd}
+                      onChangeText={(text) => this.setState({ oriPwd: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                      secureTextEntry
+                    />
+                    <Input
+                      label="新密码"
+                      value={this.state.pwd1}
+                      onChangeText={(text) => this.setState({ pwd1: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                      secureTextEntry
+                    />
+                    <Input
+                      label="重复密码"
+                      value={this.state.pwd2}
+                      onChangeText={(text) => this.setState({ pwd2: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                      secureTextEntry
+                    />
+                    <Input
+                      label="QQ号码"
+                      value={this.state.qq}
+                      onChangeText={(text) => this.setState({ qq: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
+                    <Input
+                      label="用户邮件"
+                      value={this.state.email}
+                      onChangeText={(text) => this.setState({ email: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
+                    <Input
+                      label="联系手机"
+                      value={this.state.phone}
+                      onChangeText={(text) => this.setState({ phone: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
+                    <Input
+                      label="密码问题"
+                      value={this.state.question}
+                      onChangeText={(text) => this.setState({ question: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
+                    <Input
+                      label="密码答案"
+                      value={this.state.answer}
+                      onChangeText={(text) => this.setState({ answer: text })}
+                      containerStyle={{ marginBottom: 10, marginHorizontal: 4 }}
+                    />
 
-                  <TouchableOpacity onPress={this.post} style={{ marginVertical: 10, borderWidth: 2, alignSelf: 'flex-end', padding: 5, width: 100, borderColor: 'gold', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: 'gold', fontSize: 16 }}>保存</Text>
-                  </TouchableOpacity>
-                </View>
+                    <View style={{ flex: 1, flexDirection: "row", justifyContent: 'flex-end' }}>
+                      <TouchableOpacity onPress={this.post} style={styles.saveButton}>
+                        <Text style={styles.buttonText}>保存</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity onPress={() => this.setState({ edit: false })} style={styles.saveButton}>
+                        <Text style={styles.buttonText}>取消</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  :
+                  <View style={styles.iconContainer}>
+                    <Text style={styles.changeProfileText}>用户资料</Text>
+                    <Text style={styles.userLabel}>用户名: <Text style={styles.userContent}>{this.props.user.username}</Text></Text>
+                    <Text style={styles.userLabel}>用户称呼: <Text style={styles.userContent}>{this.props.user.userNickname}</Text></Text>
+                    <Text style={styles.userLabel}>用户QQ: <Text style={styles.userContent}>{this.props.user.userQQ}</Text></Text>
+                    <Text style={styles.userLabel}>用户邮件: <Text style={styles.userContent}>{this.props.user.userEmail}</Text></Text>
+                    <Text style={styles.userLabel}>电话号码: <Text style={styles.userContent}>{this.props.user.userPhone}</Text></Text>
+
+                    <TouchableOpacity onPress={() => this.setState({ edit: true })} style={{ marginVertical: 10, borderWidth: 2, alignSelf: 'flex-end', padding: 5, width: 100, borderColor: '#FFCA28', borderRadius: 8, justifyContent: 'center', alignItems: 'center' }}>
+                      <Text style={{ color: '#FFCA28', fontSize: 16 }}>修改</Text>
+                    </TouchableOpacity>
+                  </View>
+                :
+                null
               }
               
               <AdsBanner />

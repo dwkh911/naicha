@@ -34,7 +34,7 @@ export const fetchUsers = async() => {
     }
 }
 
-export const postUserInfo = async(userId, username, userPwd, nickname, qq, phoneNumber, question, answer, viewNumber, rawPwd, pwd1, pwd2) => {
+export const postUserInfo = async(userId, username, userPwd, nickname, qq, email, phoneNumber, question, answer, viewNumber, rawPwd, pwd1, pwd2) => {
     const config = {
         method: "POST",
         headers: {
@@ -42,18 +42,16 @@ export const postUserInfo = async(userId, username, userPwd, nickname, qq, phone
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "user_id": "2841",
+            "user_id": userId,
             "user_pwd": rawPwd,
             "user_pwd1": pwd1,
             "user_pwd2": pwd2,
             "user_nick_name": nickname,
             "user_qq": qq,
-            "user_email": "som@testingemail.com",
+            "user_email": email,
             "user_phone": phoneNumber,
             "user_question": question,
             "user_answer": answer,
-            "user_points": 1000,
-            "user_invitation_code": "719036",
             "user_viewing_num": viewNumber
         })
     }
@@ -63,6 +61,33 @@ export const postUserInfo = async(userId, username, userPwd, nickname, qq, phone
             config
         );
         return response;
+    } catch(e) {
+        console.log(e);
+    }
+}
+
+export const registerUser = async(username, newPwd1, newPwd2) => {
+    const config = {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "user_name": username,
+            "user_pwd": newPwd1,
+            "user_pwd2": newPwd2
+        })
+    }
+
+    try{
+        const response = await fetch(
+            "http://naicha-api.tcore.my/index.php/user/reg.html",
+            config
+        );
+
+        return response;
+        
     } catch(e) {
         console.log(e);
     }

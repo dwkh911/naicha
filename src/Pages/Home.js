@@ -88,6 +88,7 @@ class Home extends Component {
       user.userPwd,
       user.userNickname,
       user.userQQ,
+      user.userEmail,
       user.userPhone,
       user.userQues,
       user.userAns,

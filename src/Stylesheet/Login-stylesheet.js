@@ -3,6 +3,9 @@ import { StyleSheet, Dimensions } from 'react-native'
 const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
+    flex: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         backgroundColor: '#23272A'
@@ -15,7 +18,7 @@ export default StyleSheet.create({
     loginHeader: {
         textAlign: 'center',
         fontSize: 16,
-        padding: 15,
+        padding: 10,
         color: 'white',
         backgroundColor: 'tomato'
     },
@@ -26,7 +29,7 @@ export default StyleSheet.create({
         margin: 10
     },
     input: {
-        marginBottom: 10
+        marginBottom: 7
     },
     btnStyle: {
         backgroundColor: 'tomato',
